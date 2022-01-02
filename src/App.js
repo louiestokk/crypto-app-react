@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Navbar from "./components/Navbar";
+import CoinGecko from "./components/CoinGecko";
+import Chart from "../src/components/Chart";
+import SingelCoin from "./components/SingelCoin";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route exact path="/">
+          <Home></Home>
+        </Route>
+        <Route path="/pricecrypto">
+          <SingelCoin />
+        </Route>
+        <Route path="/currencies">
+          <CoinGecko />
+        </Route>
+        <Route path="/crypto/:name" children={<Chart />}></Route>
+      </Switch>
+    </Router>
   );
 }
 
